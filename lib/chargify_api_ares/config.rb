@@ -1,6 +1,14 @@
 module Chargify
   class << self
-    attr_accessor :subdomain, :api_key, :site, :format, :timeout, :domain, :protocol
+    %i[subdomain api_key site format timeout domain protocol].each do |method|
+      define_method method do
+        Thread.current["chargify_api_ares.#{method}"]
+      end
+
+      define_method "#{method}=" do |arg|
+        Thread.current["chargify_api_ares.#{method}"] = arg
+      end
+    end
 
     def configure
       # Since site is dependent on other fields, we erase it before yielding so that it is recalculated based
