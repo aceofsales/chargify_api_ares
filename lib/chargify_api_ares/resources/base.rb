@@ -16,8 +16,8 @@ module Chargify
         Thread.current['chargify_api_ares.site'] = nil
       else
         Thread.current['chargify_api_ares.site'] = create_site_uri_from site
-        Thread.current['chargify_api_ares.user'] = URI.parser.unescape(Thread.current['chargify_api_ares.site'].user) if Thread.current['chargify_api_ares.site'].user
-        Thread.current['chargify_api_ares.password'] = URI.parser.unescape(Thread.current['chargify_api_ares.site'].password) if Thread.current['chargify_api_ares.site'].password
+        Thread.current['chargify_api_ares.user'] = URI::DEFAULT_PARSER.unescape(Thread.current['chargify_api_ares.site'].user) if Thread.current['chargify_api_ares.site'].user
+        Thread.current['chargify_api_ares.password'] = URI::DEFAULT_PARSER.unescape(Thread.current['chargify_api_ares.site'].password) if Thread.current['chargify_api_ares.site'].password
       end
     end
 
